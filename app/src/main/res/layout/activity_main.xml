@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
+    
+
 
     <TextView
         android:id="@+id/tv_title"
@@ -39,8 +41,9 @@
         android:layout_height="55dp"
         android:hint="Enter your first name"
         app:layout_constraintStart_toStartOf="@id/tv_title"
-        android:layout_marginTop="355dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_firstName"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:background="@drawable/et_bg"/>
 
@@ -64,6 +67,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_title"
         app:layout_constraintTop_toBottomOf="@id/tv_secondName"
         android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:background="@drawable/et_bg"/>
 
@@ -85,5 +89,20 @@
         android:layout_height="200dp"
         android:src="@drawable/img1"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:trackColor="#BDBDBD"
+        android:progress="50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:indeterminate="true"
+        android:indeterminateTint="#5D3FD3"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
