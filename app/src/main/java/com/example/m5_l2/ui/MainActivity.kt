@@ -1,61 +1,45 @@
 package com.example.m5_l2.ui
 
-import com.example.m5_l2.data.LoveModel
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.m5_l2.data.RetrofitInstance
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import com.example.m5_l2.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.m5_l2.utils.focusAndClear
+import com.example.m5_l2.utils.getTextName
 
-class MainActivity : AppCompatActivity(), MainContract.View {
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private lateinit var presenter: MainContract.Presenter
+class MainActivity : AppCompatActivity() {
+
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val viewModel by lazy {
+        ViewModelProvider(this)[LoveViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        loveModel()
+    }
 
-        presenter = MainPresenter(this)
-
-        binding.btnCalculate.setOnClickListener {
-            presenter.onCalculateClicked(
-                binding.etFirstName.text.toString(),
-                binding.etSecondName.text.toString()
-            )
+    private fun loveModel() = with(binding) {
+        viewModel.isProgressVisible.observe(this@MainActivity) {
+            progressBar.isVisible = it
         }
 
-    }
-
-    override fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun navigateToResult(loveModel: LoveModel) {
-        val intent = Intent(this, ResultActivity::class.java)
-        intent.putExtra("loveModel", loveModel)
-        startActivity(intent)
-    }
-
-    override fun clearInputFields() {
-        binding.apply {
-            etFirstName.text.clear()
-            etSecondName.text.clear()
-            etFirstName.clearFocus()
-            etSecondName.clearFocus()
+        btnCalculate.setOnClickListener {
+            viewModel.getPercentage(
+                etFirstName.getTextName(),
+                etSecondName.getTextName(),
+                this@MainActivity,
+                ResultActivity()
+            )
+            etFirstName.focusAndClear()
+            etSecondName.focusAndClear()
         }
     }
 }
+
+
 
