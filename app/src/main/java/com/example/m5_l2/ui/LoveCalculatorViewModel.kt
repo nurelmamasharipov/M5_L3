@@ -13,19 +13,19 @@ import jakarta.inject.Inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-    @HiltViewModel
-    class LoveCalculatorViewModel @Inject constructor(
+@HiltViewModel
+class LoveCalculatorViewModel @Inject constructor(
         private val api: ApiService
     ) : ViewModel() {
 
-        var isProgressVisible = MutableLiveData(false)
+    val isProgressVisible = MutableLiveData(false)
+
 
         fun getPercentage(
             firstName: String,
             secondName: String,
             firstActivity: Activity,
-            secondActivity: Activity
+            resultActivity: Activity
         ) {
             if (firstName.isEmpty() || secondName.isEmpty()) {
                 Toast.makeText(firstActivity, "Поле пустое!", Toast.LENGTH_SHORT).show()
@@ -39,7 +39,7 @@ import retrofit2.Response
                         ) {
                             isProgressVisible.value = false
                             if (response.isSuccessful && response.body() != null) {
-                                val intent = Intent(firstActivity, secondActivity::class.java)
+                                val intent = Intent(firstActivity, resultActivity::class.java)
                                 intent.putExtra(ResultActivity.ARG_LOVE_MODEL_KEY, response.body())
                                 firstActivity.startActivity(intent)
                             }
@@ -49,7 +49,6 @@ import retrofit2.Response
                             isProgressVisible.value = true
                             Toast.makeText(firstActivity, "Ошибка !", Toast.LENGTH_SHORT).show()
                         }
-
                     })
             }
         }
