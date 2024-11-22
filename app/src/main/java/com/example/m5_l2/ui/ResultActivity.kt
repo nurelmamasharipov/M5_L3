@@ -5,7 +5,9 @@ import com.example.m5_l2.data.LoveModel
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.m5_l2.databinding.ActivityResultBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultActivity : AppCompatActivity() {
 
     private val binding by lazy {
@@ -31,6 +33,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val ARG_LOVE_MODEL_KEY = "love_model_key"
+        const val ARG_LOVE_MODEL_KEY = "love_model"
     }
 }
