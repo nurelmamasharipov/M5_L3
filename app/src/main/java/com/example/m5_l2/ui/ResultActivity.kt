@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.m5_l2.databinding.ActivityResultBinding
 
 class ResultActivity : AppCompatActivity() {
+
     private val binding by lazy {
         ActivityResultBinding.inflate(layoutInflater)
     }
@@ -20,7 +21,7 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SetText")
+    @SuppressLint("SetTextI18n")
     fun loveDataObserve() = with(binding) {
         val data = intent.getSerializableExtra(ARG_LOVE_MODEL_KEY) as LoveModel
         tvFirstName.text = data.firstName
