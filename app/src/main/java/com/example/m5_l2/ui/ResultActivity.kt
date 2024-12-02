@@ -1,9 +1,9 @@
 package com.example.m5_l2.ui
 
 import android.annotation.SuppressLint
-import com.example.m5_l2.data.LoveModel
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.m5_l2.data.LoveModel
 import com.example.m5_l2.databinding.ActivityResultBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +22,7 @@ class ResultActivity : AppCompatActivity() {
             finish()
         }
     }
-
+    
     @SuppressLint("SetTextI18n")
     fun loveDataObserve() = with(binding) {
         val data = intent.getSerializableExtra(ARG_LOVE_MODEL_KEY) as LoveModel

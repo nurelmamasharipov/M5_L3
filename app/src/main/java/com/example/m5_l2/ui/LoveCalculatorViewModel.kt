@@ -5,14 +5,15 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.m5_l2.data.ApiService
 import com.example.m5_l2.data.LoveModel
+import com.example.m5_l2.data.network.ApiService
 import com.example.m5_l2.utils.Constant
 import dagger.hilt.android.lifecycle.HiltViewModel
-import jakarta.inject.Inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+
 @HiltViewModel
 class LoveCalculatorViewModel @Inject constructor(
         private val api: ApiService
